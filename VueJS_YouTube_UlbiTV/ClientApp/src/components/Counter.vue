@@ -1,4 +1,4 @@
-<template>
+﻿<template>
     <h1>Counter</h1>
 
     <p>This is a simple example of an Vue component.</p>
