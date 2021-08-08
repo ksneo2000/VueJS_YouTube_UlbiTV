@@ -1,11 +1,27 @@
 ﻿<template>
-    <div>
-        <div>
-            <button @click="addLike">Like</button>
-            <button  @click="addDislike">Dislike</button>
+    <div class="app">
+        <form>
+            <h4>Сщздание поста</h4>
+            <input v-bind:value="title" 
+                   @input="title=$event.target.value"
+                   class="input"
+                   type="text"
+                   placeholder="Название" />
+            <input v-bind:value="body"
+                   @input="body=$event.target.value"
+                   class="input"
+                   type="text"
+                   placeholder="Описание" />
+            <button class="btn"
+                    @click="createPost">
+                Создать
+            </button>
+        </form>
+        <div class="post" v-for="post in posts" :key="post.id">
+            <div><strong>Название поста: </strong>{{post.title}}</div>
+            <div><strong>Описание Поста:</strong>{{post.body}}</div>
         </div>
-        <div>Количество лайков: <strong>{{likes}}</strong></div>
-        <div>Количество дизлайков: <strong>{{dislikes}}</strong></div>
+       
     </div>
 </template>
 
@@ -13,22 +29,58 @@
     export default {
         data() {
             return {
-                likes: 0,
-                dislikes: 0
+                posts: [
+                    { id: 1, title: 'JavaScript', body: 'JavaScript универсальный язык' },
+                    { id: 1, title: 'JavaScript 2', body: 'JavaScript универсальный язык 2' },
+                    { id: 1, title: 'JavaScript 3', body: 'JavaScript универсальный язык 3' },
+
+                ],
+                title: '',
+                body: ''
 
             }
         },
-        methods: {
-            addLike() {
-                this.likes += 1;
-            },
-            addDislike() {
-                this.dislikes += 1;
-            }
+        method:{
+        createPost(){
+
         }
     }
+    }
+   
 </script>
 
 <style>
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:content-box;
 
+    }
+    .app{
+        padding:15px;
+    }
+    .post{
+        padding:15px;
+        border:3px solid teal;
+        margin-top:15px;
+    }
+    form{
+        display:flex;
+        flex-direction:column;
+    }
+    .input{
+        width:96%;
+        border:2px solid teal;
+        padding:10px 15px;
+        margin-top:15px;
+    }
+    .btn{
+        margin-top:15px;
+        align-self:flex-end;
+        padding:10px 15px;
+        background:none;
+        color:teal;
+        border:2px solid teal;
+
+    }
 </style>
