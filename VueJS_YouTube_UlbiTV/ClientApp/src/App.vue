@@ -1,6 +1,6 @@
 ﻿<template>
     <div class="app">
-        <form>
+        <form @submit.prevent>
             <h4>Сщздание поста</h4>
             <input v-bind:value="title" 
                    @input="title=$event.target.value"
@@ -13,7 +13,7 @@
                    type="text"
                    placeholder="Описание" />
             <button class="btn"
-                    @click="createPost">
+                    v-on:click="crPost">
                 Создать
             </button>
         </form>
@@ -31,8 +31,8 @@
             return {
                 posts: [
                     { id: 1, title: 'JavaScript', body: 'JavaScript универсальный язык' },
-                    { id: 1, title: 'JavaScript 2', body: 'JavaScript универсальный язык 2' },
-                    { id: 1, title: 'JavaScript 3', body: 'JavaScript универсальный язык 3' },
+                    { id: 2, title: 'JavaScript 2', body: 'JavaScript универсальный язык 2' },
+                    { id: 3, title: 'JavaScript 3', body: 'JavaScript универсальный язык 3' },
 
                 ],
                 title: '',
@@ -41,10 +41,15 @@
             }
         },
         method:{
-        createPost(){
-
+            crPost(){
+                const newPost = {
+                    id: Date.now(),
+                    title: this.title,
+                    body: this.body,
+                }
+                this.posts.push(newPost);
+            }
         }
-    }
     }
    
 </script>
@@ -69,7 +74,7 @@
         flex-direction:column;
     }
     .input{
-        width:96%;
+        width:98%;
         border:2px solid teal;
         padding:10px 15px;
         margin-top:15px;
